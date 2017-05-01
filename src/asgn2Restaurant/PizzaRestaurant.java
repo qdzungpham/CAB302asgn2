@@ -3,6 +3,7 @@ package asgn2Restaurant;
 import java.util.ArrayList;
 
 import asgn2Customers.Customer;
+import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 
 /**
@@ -72,6 +73,9 @@ public class PizzaRestaurant {
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		// TO DO
+		if (index > getNumPizzaOrders() || index == getNumPizzaOrders() || index < 0)
+			throw new PizzaException();
+		return pizzas.get(index);
 	}
 	
 	/**
@@ -82,6 +86,7 @@ public class PizzaRestaurant {
 	 */
 	public int getNumPizzaOrders(){
 		// TO DO
+		return pizzas.size();
 	}
 
 	/**
@@ -112,6 +117,11 @@ public class PizzaRestaurant {
 	 */	
 	public double getTotalProfit(){
 		// TO DO
+		double totalProfit = 0;
+		for (Pizza pizza: pizzas) {
+			totalProfit += pizza.getOrderProfit();
+		}
+		return totalProfit;
 	}
 	
 	/**

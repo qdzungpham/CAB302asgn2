@@ -49,13 +49,13 @@ public class LogHandler {
 		// TO DO
 		String logFile = "../../logs/" + filename;
 		String line = "";
-		ArrayList<Pizza> pizzaList = new ArrayList<Pizza>();
+		ArrayList<Pizza> pizzasList = new ArrayList<Pizza>();
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {
 
             while ((line = br.readLine()) != null) {
             	try {
-					pizzaList.add(createPizza(line));
+					pizzasList.add(createPizza(line));
 				} catch (PizzaException | LogHandlerException e) {
 					throw e;
 				}
@@ -65,7 +65,7 @@ public class LogHandler {
         	throw new LogHandlerException();
         }
 		
-		return pizzaList;
+		return pizzasList;
 		
 	}		
 

@@ -56,6 +56,11 @@ public abstract class Pizza  {
 		costPerPizza = 0;
 		toppings = new ArrayList<PizzaTopping>();
 		
+		addToppings(type);
+		
+	}
+
+	private void addToppings(String type) {
 		if (type.equals("Mergherita")) {
 			toppings.add(PizzaTopping.TOMATO);
 			toppings.add(PizzaTopping.CHEESE);
