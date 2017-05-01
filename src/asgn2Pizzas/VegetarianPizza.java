@@ -16,6 +16,9 @@ import asgn2Exceptions.PizzaException;
  */
 public class VegetarianPizza extends Pizza {
 
+	private static final String type = "Vegetarian";
+	private static final double price = 10.0;
+	
 	/**
 	 * 
 	 *  This class represents a vegetarian pizza made at the  Pizza Palace restaurant. The vegetarian pizza has certain
@@ -33,6 +36,7 @@ public class VegetarianPizza extends Pizza {
 	 */
 	public VegetarianPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
+		super(quantity, orderTime, deliveryTime, type, price);
 	}
 
 }
