@@ -1,12 +1,16 @@
 package asgn2Restaurant;
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
+import asgn2Pizzas.PizzaFactory;
 
 /**
  *
@@ -43,6 +47,26 @@ public class LogHandler {
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
 		// TO DO
+		String logFile = "../../logs/" + filename;
+		String line = "";
+		ArrayList<Pizza> pizzaList = new ArrayList<Pizza>();
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {
+
+            while ((line = br.readLine()) != null) {
+            	try {
+					pizzaList.add(createPizza(line));
+				} catch (PizzaException | LogHandlerException e) {
+					throw e;
+				}
+            }
+
+        } catch (Exception e1) {
+        	throw new LogHandlerException();
+        }
+		
+		return pizzaList;
+		
 	}		
 
 	
@@ -68,6 +92,28 @@ public class LogHandler {
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
 		// TO DO		
+		
+		String pizzaCode;
+		int quantity;
+		LocalTime orderTime;
+		LocalTime deliveryTime;
+		try {
+			String[] currentLine = line.split(",");
+			pizzaCode = currentLine[8];
+			quantity = Integer.parseInt(currentLine[9]);
+			orderTime = LocalTime.parse(currentLine[1]);
+			deliveryTime = LocalTime.parse(currentLine[2]);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			throw new LogHandlerException();
+		}
+		
+		try {
+			return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
+		} catch (PizzaException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
 	}
 
 }

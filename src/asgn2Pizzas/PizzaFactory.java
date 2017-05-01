@@ -30,6 +30,22 @@ public class PizzaFactory {
 	 * */
 	public static Pizza getPizza(String pizzaCode, int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException{
 		// TO DO
+		if (!pizzaCode.equals("PZM") || !pizzaCode.equals("PZV") || !pizzaCode.equals("PZL"))
+			throw new PizzaException();
+		
+		try {
+			if (pizzaCode.equals("PZM")) {
+				return new MargheritaPizza(quantity, orderTime, deliveryTime);
+			} else if (pizzaCode.equals("PZV")) {
+				return new VegetarianPizza(quantity, orderTime, deliveryTime);
+			} else if (pizzaCode.equals("PZL")) {
+				return new MeatLoversPizza(quantity, orderTime, deliveryTime);
+			}
+		} catch (PizzaException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		return null;
 	}
 
 }

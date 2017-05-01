@@ -23,7 +23,7 @@ public abstract class Pizza  {
 	private String type;
 	private double pricePerPizza;
 	private double costPerPizza;
-	//private ArrayList<PizzaTopping> toppings;
+	private ArrayList<PizzaTopping> toppings;
 	
 	/**
 	 *  This class represents a pizza produced at the Pizza Palace restaurant.  A detailed description of the class's fields
@@ -54,7 +54,24 @@ public abstract class Pizza  {
 		this.type = type;
 		pricePerPizza = price;
 		costPerPizza = 0;
+		toppings = new ArrayList<PizzaTopping>();
 		
+		if (type.equals("Mergherita")) {
+			toppings.add(PizzaTopping.TOMATO);
+			toppings.add(PizzaTopping.CHEESE);
+		} else if (type.equals("Vegetarian")) {
+			toppings.add(PizzaTopping.TOMATO);
+			toppings.add(PizzaTopping.CHEESE);
+			toppings.add(PizzaTopping.EGGPLANT);
+			toppings.add(PizzaTopping.MUSHROOM);
+			toppings.add(PizzaTopping.CAPSICUM);
+		} else if (type.equals("Meat Lovers")) {
+			toppings.add(PizzaTopping.TOMATO);
+			toppings.add(PizzaTopping.CHEESE);
+			toppings.add(PizzaTopping.BACON);
+			toppings.add(PizzaTopping.PEPPERONI);
+			toppings.add(PizzaTopping.SALAMI);
+		}
 	}
 
 	/**
@@ -65,6 +82,9 @@ public abstract class Pizza  {
 	 */
 	public final void calculateCostPerPizza(){
 		// TO DO
+		for (PizzaTopping topping: toppings) {
+			costPerPizza += topping.getCost();
+		}
 		
 	}
 	
@@ -122,6 +142,7 @@ public abstract class Pizza  {
 	 */
 	public final boolean containsTopping(PizzaTopping topping){
 		// TO DO
+		return toppings.contains(topping);
 		
 	}
 	
