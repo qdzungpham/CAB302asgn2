@@ -39,8 +39,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private PizzaRestaurant restaurant;
 	
 	private static PizzaGUI gui;
+	JTextField filePath;
 	private JButton browseFileBtn;
 	private JButton displayInfoBtn;
+	private JFileChooser fc;
+	private String fileName;
 	private JTable customersTable;
 	private JTable pizzasTable;
 	
@@ -58,13 +61,17 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private void initComponents() {
 		JPanel filePanel = new JPanel();
 		JLabel fileLabel = new JLabel("Select a file: ");
-		JTextField filePath = new JTextField(30);
+		filePath = new JTextField(30);
+		filePath.setEditable(false);
 		browseFileBtn = new JButton("Browse...");
+		browseFileBtn.addActionListener(this);
 		displayInfoBtn = new JButton("Display the information");
 		filePanel.add(fileLabel);
 		filePanel.add(filePath);
 		filePanel.add(browseFileBtn);
 		filePanel.add(displayInfoBtn);
+		fc = new JFileChooser();
+		fc.setCurrentDirectory(new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "logs"));
 		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
@@ -109,7 +116,16 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		Component source = (Component) e.getSource();
+		System.out.println(source);
+		if (source == browseFileBtn) {
+			int returnVal = fc.showOpenDialog(gui);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				fileName = file.getName();
+				filePath.setText(fileName);
+			} 
+		}
 	}
 
 	
