@@ -89,8 +89,8 @@ public class PizzaRestaurant {
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		// TO DO
-		if (index > getNumPizzaOrders() || index == getNumPizzaOrders() || index < 0)
-			throw new PizzaException();
+		if (index > getNumPizzaOrders() - 1 || index < 0)
+			throw new PizzaException("Pizza object not exist.");
 		return pizzas.get(index);
 	}
 	

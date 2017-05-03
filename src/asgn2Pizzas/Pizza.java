@@ -46,7 +46,7 @@ public abstract class Pizza  {
 		// TO DO	
 		// Add tests for exceptions
 		if (quantity < 1 || quantity > 10 || orderTime.isBefore(LocalTime.parse("19:00:00")) || orderTime.isAfter(LocalTime.parse("23:00:00")))
-			throw new PizzaException("Invalid supplied parameters.");
+			throw new PizzaException("Invalid data from the log file.");
 		
 		this.quantity = quantity;
 		this.orderTime = orderTime;
@@ -61,7 +61,7 @@ public abstract class Pizza  {
 	}
 
 	private void addToppings(String type) {
-		if (type.equals("Mergherita")) {
+		if (type.equals("Margherita")) {
 			toppings.add(PizzaTopping.TOMATO);
 			toppings.add(PizzaTopping.CHEESE);
 		} else if (type.equals("Vegetarian")) {
