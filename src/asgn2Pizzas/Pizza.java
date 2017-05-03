@@ -46,7 +46,7 @@ public abstract class Pizza  {
 		// TO DO	
 		// Add tests for exceptions
 		if (quantity < 1 || quantity > 10 || orderTime.isBefore(LocalTime.parse("19:00:00")) || orderTime.isAfter(LocalTime.parse("23:00:00")))
-			throw new PizzaException();
+			throw new PizzaException("Invalid supplied parameters.");
 		
 		this.quantity = quantity;
 		this.orderTime = orderTime;

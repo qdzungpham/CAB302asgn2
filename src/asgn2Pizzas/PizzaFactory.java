@@ -30,8 +30,8 @@ public class PizzaFactory {
 	 * */
 	public static Pizza getPizza(String pizzaCode, int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException{
 		// TO DO
-		if (!pizzaCode.equals("PZM") || !pizzaCode.equals("PZV") || !pizzaCode.equals("PZL"))
-			throw new PizzaException();
+		if (!pizzaCode.equals("PZM") && !pizzaCode.equals("PZV") && !pizzaCode.equals("PZL"))
+			throw new PizzaException("Invalid pizza code.");
 		
 		try {
 			if (pizzaCode.equals("PZM")) {

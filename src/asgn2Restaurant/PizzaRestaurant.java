@@ -3,6 +3,8 @@ package asgn2Restaurant;
 import java.util.ArrayList;
 
 import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 
@@ -34,6 +36,8 @@ public class PizzaRestaurant {
 	 */
 	public PizzaRestaurant() {
 		// TO DO
+		customers = new ArrayList<Customer>();
+		pizzas = new ArrayList<Pizza>();
 	}
 
 	/**
@@ -53,6 +57,18 @@ public class PizzaRestaurant {
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 		// TO DO
+		boolean result;
+		try {
+			pizzas = LogHandler.populatePizzaDataset(filename);
+		} catch (PizzaException | LogHandlerException e) {
+			// TODO Auto-generated catch block
+			result = false;
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			throw e;
+		}
+		result = true;
+		return result;
 	}
 
 	/**

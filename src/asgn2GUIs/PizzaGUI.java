@@ -12,6 +12,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
 import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.LogHandlerException;
+import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 import asgn2Restaurant.PizzaRestaurant;
 
@@ -124,6 +127,17 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				File file = fc.getSelectedFile();
 				fileName = file.getName();
 				filePath.setText(fileName);
+				restaurant = new PizzaRestaurant();
+				boolean logProcessStatus = false;
+				try {
+					logProcessStatus = restaurant.processLog(fileName);
+				} catch (CustomerException | PizzaException | LogHandlerException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(gui, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if (logProcessStatus) {
+					JOptionPane.showMessageDialog(gui, "File loaded.", "Information", JOptionPane.INFORMATION_MESSAGE);
+				}
 			} 
 		}
 	}

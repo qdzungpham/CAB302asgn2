@@ -2,7 +2,9 @@ package asgn2Restaurant;
 
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import asgn2Customers.Customer;
@@ -47,12 +49,10 @@ public class LogHandler {
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
 		// TO DO
-		String logFile = "../../logs/" + filename;
+		String logFile = "logs/" + filename;
 		String line = "";
 		ArrayList<Pizza> pizzasList = new ArrayList<Pizza>();
-		
-		try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {
-
+		try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {		
             while ((line = br.readLine()) != null) {
             	try {
 					pizzasList.add(createPizza(line));
@@ -61,8 +61,8 @@ public class LogHandler {
 				}
             }
 
-        } catch (Exception e1) {
-        	throw new LogHandlerException();
+        } catch (IOException e1) {
+        	throw new LogHandlerException("File Not Found.");
         }
 		
 		return pizzasList;
@@ -97,15 +97,15 @@ public class LogHandler {
 		int quantity;
 		LocalTime orderTime;
 		LocalTime deliveryTime;
+		String[] currentLine = line.split(",");
 		try {
-			String[] currentLine = line.split(",");
-			pizzaCode = currentLine[8];
-			quantity = Integer.parseInt(currentLine[9]);
-			orderTime = LocalTime.parse(currentLine[1]);
-			deliveryTime = LocalTime.parse(currentLine[2]);
+			pizzaCode = currentLine[7];
+			quantity = Integer.parseInt(currentLine[8]);
+			orderTime = LocalTime.parse(currentLine[0]);
+			deliveryTime = LocalTime.parse(currentLine[1]);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			throw new LogHandlerException();
+			throw new LogHandlerException("Problem parsing the line from the log file.");
 		}
 		
 		try {
