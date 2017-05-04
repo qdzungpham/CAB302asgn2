@@ -15,6 +15,9 @@ import asgn2Exceptions.PizzaException;
 
 public class PizzaFactory {
 
+	private static final String margCode = "PZM";
+	private static final String meatCode = "PZL";
+	private static final String vegeCode = "PZV";
 
 	/**
 	 * A method that uses the Factory Method pattern to produce an instance of one of the asgn2Pizzas.Pizza subclasses. 
@@ -30,15 +33,15 @@ public class PizzaFactory {
 	 * */
 	public static Pizza getPizza(String pizzaCode, int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException{
 		// TO DO
-		if (!pizzaCode.equals("PZM") && !pizzaCode.equals("PZV") && !pizzaCode.equals("PZL"))
+		if (!pizzaCode.equals(margCode) && !pizzaCode.equals(vegeCode) && !pizzaCode.equals(meatCode))
 			throw new PizzaException("Invalid pizza code.");
 		
 		try {
-			if (pizzaCode.equals("PZM")) {
+			if (pizzaCode.equals(margCode)) {
 				return new MargheritaPizza(quantity, orderTime, deliveryTime);
-			} else if (pizzaCode.equals("PZV")) {
+			} else if (pizzaCode.equals(vegeCode)) {
 				return new VegetarianPizza(quantity, orderTime, deliveryTime);
-			} else if (pizzaCode.equals("PZL")) {
+			} else if (pizzaCode.equals(meatCode)) {
 				return new MeatLoversPizza(quantity, orderTime, deliveryTime);
 			}
 		} catch (PizzaException e) {

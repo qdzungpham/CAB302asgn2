@@ -45,7 +45,8 @@ public abstract class Pizza  {
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
 		// TO DO	
 		// Add tests for exceptions
-		if (quantity < 1 || quantity > 10 || orderTime.isBefore(LocalTime.parse("19:00:00")) || orderTime.isAfter(LocalTime.parse("23:00:00")))
+		if (quantity < 1 || quantity > 10 || orderTime.isBefore(LocalTime.parse("19:00:00")) || orderTime.isAfter(LocalTime.parse("23:00:00"))
+				|| deliveryTime.isAfter(orderTime.plusHours(1)))
 			throw new PizzaException("Invalid data from the log file.");
 		
 		this.quantity = quantity;

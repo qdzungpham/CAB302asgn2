@@ -48,6 +48,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JTextField totalDistance;
 	private JButton browseFileBtn;
 	private JButton displayInfoBtn;
+	private JButton resetBtn;
 	private JButton calTotalProfitBtn;
 	private JButton calTotalDistanceBtn;
 	private JFileChooser fc;
@@ -78,10 +79,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		displayInfoBtn = new JButton("Display information");
 		displayInfoBtn.setEnabled(false);
 		displayInfoBtn.addActionListener(this);
+		resetBtn = new JButton("Reset");
+		resetBtn.setEnabled(false);
+		resetBtn.addActionListener(this);
 		filePanel.add(selectFileLabel);
 		filePanel.add(filePath);
 		filePanel.add(browseFileBtn);
 		filePanel.add(displayInfoBtn);
+		filePanel.add(resetBtn);
 		fc = new JFileChooser();
 		fc.setCurrentDirectory(new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "logs"));
 		
@@ -185,8 +190,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				}
 				if (logProcessStatus) {
 					displayInfoBtn.setEnabled(true);
+					resetBtn.setEnabled(true);
 					calTotalDistanceBtn.setEnabled(true);
 					calTotalProfitBtn.setEnabled(true);
+					browseFileBtn.setEnabled(false);
 					JOptionPane.showMessageDialog(gui, "File loaded.", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} 
@@ -202,15 +209,31 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					JOptionPane.showMessageDialog(gui, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				customersModel.addRow(new Object[]{currentCustomer.getName(), currentCustomer.getMobileNumber(), currentCustomer.getCustomerType(),
-						currentCustomer.getLocationX()+","+currentCustomer.getLocationY(),String.valueOf(df.format(currentCustomer.getDeliveryDistance()))});
+						currentCustomer.getLocationX()+", "+currentCustomer.getLocationY(),String.valueOf(df.format(currentCustomer.getDeliveryDistance()))});
 				pizzasModel.addRow(new Object[]{currentPizza.getPizzaType(), currentPizza.getQuantity(), String.valueOf(df.format(currentPizza.getOrderPrice())), 
 						String.valueOf(df.format(currentPizza.getOrderCost())), String.valueOf(df.format(currentPizza.getOrderProfit()))});
 				displayInfoBtn.setEnabled(false);
 			}
+			JOptionPane.showMessageDialog(gui, "Information displayed.", "Information", JOptionPane.INFORMATION_MESSAGE);
+			
 		} else if (source == calTotalDistanceBtn) {
 			totalDistance.setText(String.valueOf(df.format(restaurant.getTotalDeliveryDistance())));
+			JOptionPane.showMessageDialog(gui, "Total distance calculated.", "Information", JOptionPane.INFORMATION_MESSAGE);
 		} else if (source == calTotalProfitBtn) {
 			totalProfit.setText(String.valueOf(df.format(restaurant.getTotalProfit())));
+			JOptionPane.showMessageDialog(gui, "Total profit calculated.", "Information", JOptionPane.INFORMATION_MESSAGE);
+		} else if (source == resetBtn) {
+			restaurant.resetDetails();
+			customersModel.setRowCount(0);
+			pizzasModel.setRowCount(0);
+			displayInfoBtn.setEnabled(false);
+			resetBtn.setEnabled(false);
+			calTotalDistanceBtn.setEnabled(false);
+			calTotalProfitBtn.setEnabled(false);
+			browseFileBtn.setEnabled(true);
+			totalDistance.setText("");
+			totalProfit.setText("");
+			JOptionPane.showMessageDialog(gui, "All data reset.", "Information", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}

@@ -158,6 +158,8 @@ public class PizzaRestaurant {
 	 */
 	public void resetDetails(){
 		// TO DO
+		customers.clear();
+		pizzas.clear();
 	}
 
 }
