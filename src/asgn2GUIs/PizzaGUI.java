@@ -100,7 +100,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		JTable customersTable = new JTable(customersModel);
 		JScrollPane customersScroller = new JScrollPane(customersTable);
 		customersScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		//customersScroller.setPreferredSize(new Dimension(600, 300));
+		customersScroller.setPreferredSize(new Dimension(600, 300));
 		JPanel calTotalDistancePanel = new JPanel();
 		JLabel totalDistanceLabel = new JLabel("Total distance travelled: ");
 		totalDistance = new JTextField(20);
@@ -127,7 +127,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		JTable pizzasTable = new JTable(pizzasModel);
 		JScrollPane pizzasScroller = new JScrollPane(pizzasTable);
 		pizzasScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		//pizzasScroller.setPreferredSize(new Dimension(600, 300));
+		pizzasScroller.setPreferredSize(new Dimension(600, 300));
 		JPanel calTotalProfitPanel = new JPanel();
 		JLabel totalProfitLabel = new JLabel("Total profit made: ");
 		totalProfit = new JTextField(20);
@@ -193,18 +193,22 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		} else if (source == displayInfoBtn) {
 			for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
 				Pizza currentPizza = null;
+				Customer currentCustomer = null;
 				try {
 					currentPizza = restaurant.getPizzaByIndex(i);
-				} catch (PizzaException e1) {
+					currentCustomer = restaurant.getCustomerByIndex(i);	
+				} catch (PizzaException | CustomerException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(gui, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
+				customersModel.addRow(new Object[]{currentCustomer.getName(), currentCustomer.getMobileNumber(), currentCustomer.getCustomerType(),
+						currentCustomer.getLocationX()+","+currentCustomer.getLocationY(),String.valueOf(df.format(currentCustomer.getDeliveryDistance()))});
 				pizzasModel.addRow(new Object[]{currentPizza.getPizzaType(), currentPizza.getQuantity(), String.valueOf(df.format(currentPizza.getOrderPrice())), 
 						String.valueOf(df.format(currentPizza.getOrderCost())), String.valueOf(df.format(currentPizza.getOrderProfit()))});
 				displayInfoBtn.setEnabled(false);
 			}
 		} else if (source == calTotalDistanceBtn) {
-			
+			totalDistance.setText(String.valueOf(df.format(restaurant.getTotalDeliveryDistance())));
 		} else if (source == calTotalProfitBtn) {
 			totalProfit.setText(String.valueOf(df.format(restaurant.getTotalProfit())));
 		}

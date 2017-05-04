@@ -12,6 +12,9 @@ import asgn2Exceptions.CustomerException;
  */
 public class PickUpCustomer extends Customer {
 
+	private static String Type = "PUC";
+	private static double Distance;
+
 	/**
 	 *  This class represents a customer of the Pizza Palace restaurant that has chosen to pickup their pizza at the restaurant. 
 	 *  A CustomerException is thrown if the any of the constraints listed in Section 5.2 of the Assignment Specification are violated. 
@@ -27,7 +30,7 @@ public class PickUpCustomer extends Customer {
 	 * 
 	 */
 	public PickUpCustomer(String name, String mobileNumber, int locationX,  int locationY) throws CustomerException {
-		// TO DO	
+		super(name, mobileNumber, locationX, locationY, Type);	
 	}
 
 	/**
@@ -37,7 +40,8 @@ public class PickUpCustomer extends Customer {
 	 */
 	@Override
 	public double getDeliveryDistance() {
-		// TO DO
+		Distance = 0;
+		return Distance;
 	}
 
 }

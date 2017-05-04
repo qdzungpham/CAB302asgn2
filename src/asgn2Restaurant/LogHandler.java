@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import asgn2Customers.Customer;
+import asgn2Customers.CustomerFactory;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
@@ -37,6 +38,23 @@ public class LogHandler {
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
+		String logFile = "logs/" + filename;
+		String line = "";
+		ArrayList<Customer> customerList = new ArrayList<Customer>();
+		try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {		
+            while ((line = br.readLine()) != null) {
+            	try {
+            		customerList.add(createCustomer(line));
+				} catch (CustomerException | LogHandlerException e) {
+					throw e;
+				}
+            }
+
+        } catch (IOException e1) {
+        	throw new LogHandlerException("File Not Found.");
+        }
+		
+		return customerList;
 	}		
 
 	/**
@@ -80,6 +98,29 @@ public class LogHandler {
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
 		// TO DO
+		String customerCode;
+		String Name;
+		String MobileNumber;
+		int LocationX;
+		int LocationY;
+		String[] currentLine = line.split(",");
+		try {
+			customerCode = currentLine[4];
+			Name = currentLine[2];
+			MobileNumber =currentLine[3];
+			LocationX = Integer.parseInt(currentLine[5]);
+			LocationY = Integer.parseInt(currentLine[6]);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			throw new LogHandlerException("Problem parsing the line from the log file.");
+		}
+		
+		try {
+			return CustomerFactory.getCustomer(customerCode, Name, MobileNumber, LocationX, LocationY);
+		} catch (CustomerException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
 	}
 	
 	/**

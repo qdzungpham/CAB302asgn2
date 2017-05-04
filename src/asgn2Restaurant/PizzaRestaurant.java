@@ -60,7 +60,8 @@ public class PizzaRestaurant {
 		boolean result;
 		try {
 			pizzas = LogHandler.populatePizzaDataset(filename);
-		} catch (PizzaException | LogHandlerException e) {
+			customers = LogHandler.populateCustomerDataset(filename);
+		} catch (CustomerException | PizzaException | LogHandlerException e) {
 			// TODO Auto-generated catch block
 			result = false;
 			System.out.println(e.getMessage());
@@ -79,6 +80,9 @@ public class PizzaRestaurant {
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		// TO DO
+		if (index > getNumCustomerOrders() - 1 || index < 0)
+			throw new CustomerException("Customer object not exist.");
+		return customers.get(index);
 	}
 	
 	/**
@@ -113,6 +117,7 @@ public class PizzaRestaurant {
 	 */
 	public int getNumCustomerOrders(){
 		// TO DO
+		return customers.size();
 	}
 
 			
@@ -124,6 +129,11 @@ public class PizzaRestaurant {
 	 */
 	public double getTotalDeliveryDistance(){
 		// TO DO
+		double toalDistance = 0;
+		for (Customer customer: customers) {
+			toalDistance += customer.getDeliveryDistance();
+		}
+		return toalDistance;
 	}
 
 	/**

@@ -12,6 +12,14 @@ import asgn2Exceptions.CustomerException;
  */
 public class DroneDeliveryCustomer extends Customer {
 
+	
+	private static String Type = "DNC";
+	private static double Distance;
+	private static int Restaurant_X = 0;
+	private static int Restaurant_Y = 0;
+	private int LocationX;
+	private int LocationY;
+	
 
 	/**
 	 *  This class represents a customer of the Pizza Palace restaurant that has chosen to have their pizza delivered by 
@@ -29,8 +37,12 @@ public class DroneDeliveryCustomer extends Customer {
 	 * 
 	 */
 	public DroneDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
-		// TO DO		
-	}
+		super(name, mobileNumber, locationX, locationY, Type);
+		
+			this.LocationX = locationX;
+			this.LocationY = locationY;
+		}
+		
 
 	/**
 	 * Returns the Euclidean Distance between the instance of DroneDeliveryCustomer and the restaurant. Overrides  
@@ -40,8 +52,8 @@ public class DroneDeliveryCustomer extends Customer {
 	 */
 	@Override
 	public double getDeliveryDistance() {
-		// TO DO
-
+		Distance = Math.sqrt(Math.pow((Restaurant_X-LocationX), 2)+Math.pow((Restaurant_Y-LocationY), 2));
+		return Distance;
 	}
 	
 
