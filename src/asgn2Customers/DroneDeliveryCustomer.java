@@ -13,7 +13,7 @@ import asgn2Exceptions.CustomerException;
 public class DroneDeliveryCustomer extends Customer {
 
 	
-	private static String Type = "DNC";
+	private static String Type = "Drone Delivery";
 	private static double Distance;
 	private static int Restaurant_X = 0;
 	private static int Restaurant_Y = 0;

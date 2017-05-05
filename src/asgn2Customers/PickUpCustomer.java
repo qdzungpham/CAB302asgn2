@@ -12,7 +12,7 @@ import asgn2Exceptions.CustomerException;
  */
 public class PickUpCustomer extends Customer {
 
-	private static String Type = "PUC";
+	private static String Type = "Pick Up in Store";
 	private static double Distance;
 
 	/**

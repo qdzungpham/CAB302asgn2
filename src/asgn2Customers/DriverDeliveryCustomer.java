@@ -12,7 +12,7 @@ import asgn2Exceptions.CustomerException;
  */
 public class DriverDeliveryCustomer extends Customer {
 	 
-	private static String Type = "DVC";
+	private static String Type = "Driver Delivery";
 	private static double Distance;
 	private static int Restaurant_X = 0;
 	private static int Restaurant_Y = 0;
