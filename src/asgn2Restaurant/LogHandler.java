@@ -38,7 +38,7 @@ public class LogHandler {
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
-		String logFile = "logs/" + filename;
+		String logFile = ".//logs/" + filename;
 		String line = "";
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {		
@@ -51,7 +51,7 @@ public class LogHandler {
             }
 
         } catch (IOException e1) {
-        	throw new LogHandlerException("File Not Found.");
+        	throw new LogHandlerException("Problem with the log file.");
         }
 		
 		return customerList;
@@ -78,12 +78,11 @@ public class LogHandler {
 					throw e;
 				}
             }
+            return pizzasList;
 
         } catch (IOException e1) {
         	throw new LogHandlerException("File Not Found.");
         }
-		
-		return pizzasList;
 		
 	}		
 
