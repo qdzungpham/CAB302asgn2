@@ -231,6 +231,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			calTotalDistanceBtn.setEnabled(false);
 			calTotalProfitBtn.setEnabled(false);
 			browseFileBtn.setEnabled(true);
+			filePath.setText("");
 			totalDistance.setText("");
 			totalProfit.setText("");
 			JOptionPane.showMessageDialog(gui, "All data reset.", "Information", JOptionPane.INFORMATION_MESSAGE);

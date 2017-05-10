@@ -61,22 +61,28 @@ public abstract class Pizza  {
 		
 	}
 
-	private void addToppings(String type) {
-		if (type.equals("Margherita")) {
+	private void addToppings(String type) throws PizzaException {
+		switch(type) {
+		case "Margherita":
 			toppings.add(PizzaTopping.TOMATO);
 			toppings.add(PizzaTopping.CHEESE);
-		} else if (type.equals("Vegetarian")) {
+			break;
+		case "Vegetarian":
 			toppings.add(PizzaTopping.TOMATO);
 			toppings.add(PizzaTopping.CHEESE);
 			toppings.add(PizzaTopping.EGGPLANT);
 			toppings.add(PizzaTopping.MUSHROOM);
 			toppings.add(PizzaTopping.CAPSICUM);
-		} else if (type.equals("Meat Lovers")) {
+			break;
+		case "Meat Lovers":
 			toppings.add(PizzaTopping.TOMATO);
 			toppings.add(PizzaTopping.CHEESE);
 			toppings.add(PizzaTopping.BACON);
 			toppings.add(PizzaTopping.PEPPERONI);
 			toppings.add(PizzaTopping.SALAMI);
+			break;
+		default:
+			throw new PizzaException("Invalid pizza type.");
 		}
 	}
 
