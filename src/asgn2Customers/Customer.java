@@ -40,20 +40,17 @@ public abstract class Customer {
 	 * 
 	 */
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
-		if (name.length()>=1 && name.length()<= 20 && name.trim().length() > 0){
+		if ((name.length()>=1 && name.length()<= 20 && name.trim().length() > 0) && (mobileNumber.matches("[0][0-9]{9}")) && 
+				(locationX > -10 && locationX < 10 && locationY >-10 && locationY <10)){
 			this.Name = name;
-		}
-		else {
-			throw new CustomerException("Custermer name is invalid ");
-		}
-		if (mobileNumber.matches("[0][0-9]{9}")) {
 			this.MobileNumber = mobileNumber;
+			this.LocationX = locationX;
+			this.LocationY = locationY;
 		}
 		else {
-			throw new CustomerException("Mobile number is invalid");
+			throw new CustomerException("Inputs not valid");
 		}
-		this.LocationX = locationX;
-		this.LocationY = locationY;
+		
 		this.Type = type;
 	}
 	
