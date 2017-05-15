@@ -1,6 +1,7 @@
 package asgn2Pizzas;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import asgn2Exceptions.PizzaException;
 
@@ -37,6 +38,12 @@ public class VegetarianPizza extends Pizza {
 	public VegetarianPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
 		super(quantity, orderTime, deliveryTime, type, price);
+		toppings = new ArrayList<PizzaTopping>();
+		toppings.add(PizzaTopping.TOMATO);
+		toppings.add(PizzaTopping.CHEESE);
+		toppings.add(PizzaTopping.EGGPLANT);
+		toppings.add(PizzaTopping.MUSHROOM);
+		toppings.add(PizzaTopping.CAPSICUM);
 		super.calculateCostPerPizza();
 	}
 

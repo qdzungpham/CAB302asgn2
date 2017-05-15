@@ -67,7 +67,7 @@ public class LogHandler {
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
 		// TO DO
-		String logFile = "logs/" + filename;
+		String logFile = ".//logs/" + filename;
 		String line = "";
 		ArrayList<Pizza> pizzasList = new ArrayList<Pizza>();
 		try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {		

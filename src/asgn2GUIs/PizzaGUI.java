@@ -186,6 +186,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					logProcessStatus = restaurant.processLog(fileName);
 				} catch (CustomerException | PizzaException | LogHandlerException e1) {
 					// TODO Auto-generated catch block
+					System.out.println(e1.getMessage());
+					e1.printStackTrace();
 					JOptionPane.showMessageDialog(gui, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				if (logProcessStatus) {

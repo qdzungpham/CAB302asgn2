@@ -1,6 +1,6 @@
 package asgn2Tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -164,6 +164,12 @@ public class CustomerTests {
 		assertEquals(10, test.getDeliveryDistance(), 0.001);
 	}
 	
+	@Test
+	public void DriverDeliveryCustomerClassCheckDistance1() throws CustomerException{
+		Customer test = new DriverDeliveryCustomer("rick", "0123456789", 2, 7);
+		assertEquals(9, test.getDeliveryDistance(), 0.001);
+	}
+	
 	//===========================================================================================
 	// DroneDeliveryCustomer Class
 	@Test(expected = CustomerException.class)
@@ -236,5 +242,58 @@ public class CustomerTests {
 	public void DroneDeliveryCustomerClassCheckDistance() throws CustomerException{
 		Customer test = new DroneDeliveryCustomer("rick", "0123456789", 4, 3);
 		assertEquals(5, test.getDeliveryDistance(), 0.001);
+	}
+	
+	@Test 
+	public void DroneDeliveryCustomerClassCheckDistance1() throws CustomerException{
+		Customer test = new DroneDeliveryCustomer("rick", "0123456789", 6, 3);
+		assertEquals(6.708, test.getDeliveryDistance(), 0.001);
+	}
+	
+	// Customer class
+	@Test
+	public void CustomerClassCheckGetName() throws CustomerException{
+		Customer test = new DriverDeliveryCustomer("rick", "0123456789", 5, 5);
+		assertEquals("rick", test.getName());
+	}
+	
+	@Test
+	public void CustomerClassCheckGetMobileNumber() throws CustomerException{
+		Customer test = new DriverDeliveryCustomer("rick", "0123456789", 5, 5);
+		assertEquals("0123456789", test.getMobileNumber());
+	}
+	
+	@Test
+	public void CustomerClassCheckGetCustomerType() throws CustomerException{
+		Customer test = new DriverDeliveryCustomer("rick", "0123456789", 5, 5);
+		assertEquals("Driver Delivery", test.getCustomerType());
+	}
+	
+	@Test
+	public void CustomerClassCheckGetLocationX() throws CustomerException{
+		Customer test = new DriverDeliveryCustomer("rick", "0123456789", 2, 5);
+		assertEquals(2, test.getLocationX());
+	}
+	
+	@Test
+	public void CustomerClassCheckGetLocationY() throws CustomerException{
+		Customer test = new DriverDeliveryCustomer("rick", "0123456789", 2, 5);
+		assertEquals(5, test.getLocationY());
+	}
+	
+	@Test
+	public void CustomerClassCheck2Objects() throws CustomerException{
+		Customer test = new DriverDeliveryCustomer("rick", "0123456789", 5, 5);
+		Customer test1 = new DroneDeliveryCustomer("hang", "0987654321", 1, 1);
+		assertEquals(false, test.equals(test1));
+	}
+	
+	@Test 
+	public void CustomerClassInclusiveBoundaryChecks() throws CustomerException{
+		Customer test = new DriverDeliveryCustomer("rick", "0123456789", 10, 10);
+		Customer test1 = new DroneDeliveryCustomer("hang", "0987654321", -10, -10);
+		Customer test2 = new DroneDeliveryCustomer("z", "0987654321", 5, 5);
+		Customer test3 = new DroneDeliveryCustomer("rick rick rick rick ", "0987654321", 5, 5);
+
 	}
 }

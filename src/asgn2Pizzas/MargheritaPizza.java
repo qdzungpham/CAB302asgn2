@@ -40,6 +40,9 @@ public class MargheritaPizza extends Pizza {
 	public MargheritaPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
 		super(quantity, orderTime, deliveryTime, type, price);
+		toppings = new ArrayList<PizzaTopping>();
+		toppings.add(PizzaTopping.TOMATO);
+		toppings.add(PizzaTopping.CHEESE);
 		super.calculateCostPerPizza();
 	}
 
