@@ -2,7 +2,6 @@ package asgn2Restaurant;
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -137,8 +136,8 @@ public class LogHandler {
 		int quantity;
 		LocalTime orderTime;
 		LocalTime deliveryTime;
-		String[] currentLine = line.split(",");
 		try {
+			String[] currentLine = line.split(",");
 			pizzaCode = currentLine[7];
 			quantity = Integer.parseInt(currentLine[8]);
 			orderTime = LocalTime.parse(currentLine[0]);
