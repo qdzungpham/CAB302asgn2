@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import asgn2Customers.Customer;
+import asgn2Customers.DriverDeliveryCustomer;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Restaurant.LogHandler;
@@ -42,6 +43,11 @@ public class LogHandlerCustomerTests {
 	@Test (expected = LogHandlerException.class)
 	public void createCustomerParsingLocationYStringLogHandlerException() throws CustomerException, LogHandlerException {
 		Customer test = LogHandler.createCustomer("19:00:00,19:20:00,Casey Jones,0123456789,DVC,5,asd,PZV,2");
+	}
+	
+	@Test (expected = LogHandlerException.class)
+	public void createCustomerParsingLocationTimeLogHandlerException() throws CustomerException, LogHandlerException {
+		Customer test = LogHandler.createCustomer("19:00:00,19:20:00,Casey Jones,0123456789,DVC,asd,5,PZV,2");
 	}
 	
 	@Test (expected = CustomerException.class)
@@ -80,9 +86,28 @@ public class LogHandlerCustomerTests {
 		assertEquals(5, test.getLocationY());
 	}
 	
+	@Test
+	public void createCustomerNormalTest2() throws CustomerException, LogHandlerException {
+		Customer test = LogHandler.createCustomer("19:00:00,19:40:00,rick,0123456788,DVC,3,2,PZV,4");
+		Customer cus = new DriverDeliveryCustomer("rick", "0123456788", 3, 2);
+		assertEquals(true, test.equals(cus));
+	}
+	
 	@Test (expected = LogHandlerException.class)
 	public void populateCustomerDatasetFileNotFoundLogHandlerException() throws CustomerException, LogHandlerException {
-		ArrayList<Customer> test = LogHandler.populateCustomerDataset("asdads.txt");
+		ArrayList<Customer> test = LogHandler.populateCustomerDataset("asdadsasdwqqc.txt");
 	}
+	
+	@Test (expected = LogHandlerException.class)
+	public void populateCustomerParsingLineLogHandlerException() throws CustomerException, LogHandlerException {
+		ArrayList<Customer> test = LogHandler.populateCustomerDataset("RicktestLogParsingLineErrors.txt");
+	}
+	
+	@Test (expected = CustomerException.class)
+	public void populateCustomerSemanticErrorsCustomerException() throws CustomerException, LogHandlerException {
+		ArrayList<Customer> test = LogHandler.populateCustomerDataset("RicktestLogSementicErrors.txt");
+	}
+	
+	
 	
 }

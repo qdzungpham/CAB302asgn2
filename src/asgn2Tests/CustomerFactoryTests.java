@@ -30,6 +30,26 @@ public class CustomerFactoryTests {
 		Customer test = CustomerFactory.getCustomer("RIC", "rick", "0123456789", 5, 5);
 	}
 	
+	@Test(expected = CustomerException.class)
+	public void InvalidInputsException() throws CustomerException{
+		Customer test = CustomerFactory.getCustomer("DVC", "rick", "0123456789", 11, 5);
+	}
+	
+	@Test(expected = CustomerException.class)
+	public void InvalidInputsException1() throws CustomerException{
+		Customer test = CustomerFactory.getCustomer("DVC", "rick", "0123456789", 5, 11);
+	}
+	
+	@Test(expected = CustomerException.class)
+	public void InvalidInputsException2() throws CustomerException{
+		Customer test = CustomerFactory.getCustomer("DVC", "rick rick rick rick rick rick", "0123456789", 5, 5);
+	}
+	
+	@Test(expected = CustomerException.class)
+	public void InvalidInputsException3() throws CustomerException{
+		Customer test = CustomerFactory.getCustomer("DVC", "rick", "01234567891", 5, 5);
+	}
+	
 	@Test
 	public void CheckReturnPickUpCustomerObject() throws CustomerException {
 		Customer cus = new PickUpCustomer("rick", "0123456789", 5, 5);

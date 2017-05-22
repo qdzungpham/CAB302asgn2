@@ -54,5 +54,37 @@ public class RestaurantCustomerTests {
 		assertEquals(0, test.getNumCustomerOrders());
 	}
 	
+	@Test (expected = LogHandlerException.class)
+	public void processLogFileNotFoundLogHandlerException() throws CustomerException, PizzaException, LogHandlerException {
+		PizzaRestaurant test = new PizzaRestaurant();
+		test.processLog("asdfxz.txt");
+	}
+	
+	@Test (expected = LogHandlerException.class)
+	public void processLogParsingLineLogHandlerException() throws CustomerException, PizzaException, LogHandlerException {
+		PizzaRestaurant test = new PizzaRestaurant();
+		test.processLog("RicktestLogLineParsingErrors.txt");
+	}
+	
+	@Test (expected = CustomerException.class)
+	public void processLogCustomerException() throws CustomerException, PizzaException, LogHandlerException {
+		PizzaRestaurant test = new PizzaRestaurant();
+		test.processLog("RicktestLogCustomerException.txt");
+	}
+	
+	@Test (expected = PizzaException.class)
+	public void processLogPizzaException() throws CustomerException, PizzaException, LogHandlerException {
+		PizzaRestaurant test = new PizzaRestaurant();
+		test.processLog("RicktestLogPizzaException.txt");
+	}
+	
+	@Test 
+	public void processLogNormalCase() throws CustomerException, PizzaException, LogHandlerException {
+		PizzaRestaurant test = new PizzaRestaurant();
+		assertEquals(true, test.processLog("20170101.txt"));
+		
+	}
+	
+	
 
 }
