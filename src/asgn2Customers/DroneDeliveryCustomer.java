@@ -38,7 +38,8 @@ public class DroneDeliveryCustomer extends Customer {
 	 */
 	public DroneDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
 		super(name, mobileNumber, locationX, locationY, Type);
-		
+		if(locationX == 0 && locationY==0 )
+			throw new CustomerException("Inputs not valid");
 			this.LocationX = locationX;
 			this.LocationY = locationY;
 		}
