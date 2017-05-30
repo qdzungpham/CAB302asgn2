@@ -50,7 +50,7 @@ public class LogHandler {
             }
 
         } catch (IOException e1) {
-        	throw new LogHandlerException("Problem with the log file.");
+        	throw new LogHandlerException("LogHandlerException: Invalid file.");
         }
 		
 		return customerList;
@@ -80,7 +80,7 @@ public class LogHandler {
             return pizzasList;
 
         } catch (IOException e1) {
-        	throw new LogHandlerException("File Not Found.");
+        	throw new LogHandlerException("LogHandlerException: Invalid file.");
         }
 		
 	}		
@@ -110,7 +110,7 @@ public class LogHandler {
 			LocationY = Integer.parseInt(currentLine[6]);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			throw new LogHandlerException("Problem parsing the line from the log file.");
+			throw new LogHandlerException("LogHandlerException: Problem parsing the line from the log file.");
 		}
 		
 		try {
@@ -144,7 +144,7 @@ public class LogHandler {
 			deliveryTime = LocalTime.parse(currentLine[1]);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			throw new LogHandlerException("Problem parsing the line from the log file.");
+			throw new LogHandlerException("LogHandlerException: Problem parsing the line from the log file.");
 		}
 		
 		try {

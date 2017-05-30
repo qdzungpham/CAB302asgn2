@@ -48,7 +48,7 @@ public abstract class Customer {
 			this.LocationY = locationY;
 		}
 		else {
-			throw new CustomerException("Inputs not valid");
+			throw new CustomerException("CustomerException: Invalid data from the log file.");
 		}
 		
 		this.Type = type;

@@ -36,7 +36,7 @@ public class CustomerFactory {
 	 */
 	public static Customer getCustomer(String customerCode, String name, String mobileNumber, int locationX,  int locationY) throws CustomerException{
 		if (!customerCode.equals(PickUp) && !customerCode.equals(DroneDelivery) && !customerCode.equals(DriverDelivery)){
-			throw new CustomerException("Invalid customerCode code.");
+			throw new CustomerException("CustomerException: Invalid customer code.");
 		}
 		try {
 			if (customerCode.equals(PickUp)){

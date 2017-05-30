@@ -76,7 +76,7 @@ public class PizzaRestaurant {
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		// TO DO
 		if (index > getNumCustomerOrders() - 1 || index < 0)
-			throw new CustomerException("Customer object not exist");
+			throw new CustomerException("CustomerException: Customer object not exist");
 		return customers.get(index);
 	}
 	
@@ -89,7 +89,7 @@ public class PizzaRestaurant {
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		// TO DO
 		if (index > getNumPizzaOrders() - 1 || index < 0)
-			throw new PizzaException("Pizza object not exist");
+			throw new PizzaException("PizzaException: Pizza object not exist");
 		return pizzas.get(index);
 	}
 	

@@ -34,7 +34,7 @@ public class PizzaFactory {
 	public static Pizza getPizza(String pizzaCode, int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException{
 		// TO DO
 		if (!pizzaCode.equals(margCode) && !pizzaCode.equals(vegeCode) && !pizzaCode.equals(meatCode))
-			throw new PizzaException("Invalid pizza code.");
+			throw new PizzaException("PizzaException: Invalid pizza code.");
 		
 		try {
 			if (pizzaCode.equals(margCode)) {

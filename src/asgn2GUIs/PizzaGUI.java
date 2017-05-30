@@ -47,8 +47,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JTextField totalProfit;
 	private JTextField totalDistance;
 	private JButton browseFileBtn;
-	private JButton displayInfoBtn;
 	private JButton resetBtn;
+	private JButton displayOrdersBtn;
+	private JButton displayCustomersBtn;
 	private JButton calTotalProfitBtn;
 	private JButton calTotalDistanceBtn;
 	private JFileChooser fc;
@@ -72,20 +73,16 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private void initComponents() {
 		JPanel filePanel = new JPanel();
 		JLabel selectFileLabel = new JLabel("File name: ");
-		filePath = new JTextField(20);
+		filePath = new JTextField(35);
 		filePath.setEditable(false);
 		browseFileBtn = new JButton("Browse...");
 		browseFileBtn.addActionListener(this);
-		displayInfoBtn = new JButton("Display information");
-		displayInfoBtn.setEnabled(false);
-		displayInfoBtn.addActionListener(this);
 		resetBtn = new JButton("Reset");
 		resetBtn.setEnabled(false);
 		resetBtn.addActionListener(this);
 		filePanel.add(selectFileLabel);
 		filePanel.add(filePath);
 		filePanel.add(browseFileBtn);
-		filePanel.add(displayInfoBtn);
 		filePanel.add(resetBtn);
 		fc = new JFileChooser();
 		fc.setCurrentDirectory(new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "logs"));
@@ -107,12 +104,16 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		customersScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		customersScroller.setPreferredSize(new Dimension(600, 200));
 		JPanel calTotalDistancePanel = new JPanel();
+		displayCustomersBtn = new JButton("Display customers");
+		displayCustomersBtn.setEnabled(false);
+		displayCustomersBtn.addActionListener(this);
 		JLabel totalDistanceLabel = new JLabel("Total distance travelled: ");
 		totalDistance = new JTextField(20);
 		totalDistance.setEditable(false);
 		calTotalDistanceBtn = new JButton("Calculate");
 		calTotalDistanceBtn.setEnabled(false);
 		calTotalDistanceBtn.addActionListener(this);
+		calTotalDistancePanel.add(displayCustomersBtn);
 		calTotalDistancePanel.add(totalDistanceLabel);
 		calTotalDistancePanel.add(totalDistance);
 		calTotalDistancePanel.add(calTotalDistanceBtn);
@@ -134,12 +135,16 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		pizzasScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		pizzasScroller.setPreferredSize(new Dimension(600, 200));
 		JPanel calTotalProfitPanel = new JPanel();
+		displayOrdersBtn = new JButton("Display orders");
+		displayOrdersBtn.setEnabled(false);
+		displayOrdersBtn.addActionListener(this);
 		JLabel totalProfitLabel = new JLabel("Total profit made: ");
 		totalProfit = new JTextField(20);
 		totalProfit.setEditable(false);
 		calTotalProfitBtn = new JButton("Calculate");
 		calTotalProfitBtn.setEnabled(false);
 		calTotalProfitBtn.addActionListener(this);
+		calTotalProfitPanel.add(displayOrdersBtn);
 		calTotalProfitPanel.add(totalProfitLabel);
 		calTotalProfitPanel.add(totalProfit);
 		calTotalProfitPanel.add(calTotalProfitBtn);
@@ -191,33 +196,43 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					JOptionPane.showMessageDialog(gui, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				if (logProcessStatus) {
-					displayInfoBtn.setEnabled(true);
+					displayCustomersBtn.setEnabled(true);
+					displayOrdersBtn.setEnabled(true);
 					resetBtn.setEnabled(true);
-					calTotalDistanceBtn.setEnabled(true);
-					calTotalProfitBtn.setEnabled(true);
 					browseFileBtn.setEnabled(false);
 					JOptionPane.showMessageDialog(gui, "File loaded.", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} 
-		} else if (source == displayInfoBtn) {
-			for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
-				Pizza currentPizza = null;
+		} else if (source == displayCustomersBtn) {
+			for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
 				Customer currentCustomer = null;
 				try {
-					currentPizza = restaurant.getPizzaByIndex(i);
 					currentCustomer = restaurant.getCustomerByIndex(i);	
 					customersModel.addRow(new Object[]{currentCustomer.getName(), currentCustomer.getMobileNumber(), currentCustomer.getCustomerType(),
 							currentCustomer.getLocationX()+", "+currentCustomer.getLocationY(),String.valueOf(df.format(currentCustomer.getDeliveryDistance()))});
-					pizzasModel.addRow(new Object[]{currentPizza.getPizzaType(), currentPizza.getQuantity(), String.valueOf(df.format(currentPizza.getOrderPrice())), 
-							String.valueOf(df.format(currentPizza.getOrderCost())), String.valueOf(df.format(currentPizza.getOrderProfit()))});
-					displayInfoBtn.setEnabled(false);
-				} catch (PizzaException | CustomerException e1) {
+					displayCustomersBtn.setEnabled(false);
+					calTotalDistanceBtn.setEnabled(true);
+				} catch (CustomerException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(gui, e1.getMessage() + " (index " + i +").", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-			JOptionPane.showMessageDialog(gui, "Information displayed.", "Information", JOptionPane.INFORMATION_MESSAGE);
-			
+			JOptionPane.showMessageDialog(gui, "Customers displayed.", "Information", JOptionPane.INFORMATION_MESSAGE);
+		} else if (source == displayOrdersBtn) {
+			for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
+				Pizza currentPizza = null;
+				try {
+					currentPizza = restaurant.getPizzaByIndex(i);
+					pizzasModel.addRow(new Object[]{currentPizza.getPizzaType(), currentPizza.getQuantity(), String.valueOf(df.format(currentPizza.getOrderPrice())), 
+							String.valueOf(df.format(currentPizza.getOrderCost())), String.valueOf(df.format(currentPizza.getOrderProfit()))});
+					displayOrdersBtn.setEnabled(false);
+					calTotalProfitBtn.setEnabled(true);
+				} catch (PizzaException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(gui, e1.getMessage() + " (index " + i +").", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			JOptionPane.showMessageDialog(gui, "Orders displayed.", "Information", JOptionPane.INFORMATION_MESSAGE);
 		} else if (source == calTotalDistanceBtn) {
 			totalDistance.setText(String.valueOf(df.format(restaurant.getTotalDeliveryDistance())));
 			JOptionPane.showMessageDialog(gui, "Total distance calculated.", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -228,7 +243,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			restaurant.resetDetails();
 			customersModel.setRowCount(0);
 			pizzasModel.setRowCount(0);
-			displayInfoBtn.setEnabled(false);
+			displayCustomersBtn.setEnabled(false);
+			displayOrdersBtn.setEnabled(false);
 			resetBtn.setEnabled(false);
 			calTotalDistanceBtn.setEnabled(false);
 			calTotalProfitBtn.setEnabled(false);
