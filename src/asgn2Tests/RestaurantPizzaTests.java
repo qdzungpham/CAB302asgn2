@@ -13,7 +13,7 @@ import asgn2Restaurant.PizzaRestaurant;
  * A class that tests the methods relating to the handling of Pizza objects in the asgn2Restaurant.PizzaRestaurant class as well as
  * processLog and resetDetails.
  * 
- * @author Person B
+ * @author n9326448/Hang Su
  *
  */
 
@@ -59,19 +59,7 @@ public class RestaurantPizzaTests {
 	@Test (expected = LogHandlerException.class)
 	public void processLogFileNotFoundLogHandlerException() throws CustomerException, PizzaException, LogHandlerException {
 		PizzaRestaurant Restaurant = new PizzaRestaurant();
-		Restaurant.processLog("asdfxz.txt");
-	}
-	
-	@Test (expected = LogHandlerException.class)
-	public void processLogParsingLineLogHandlerException() throws CustomerException, PizzaException, LogHandlerException {
-		PizzaRestaurant Restaurant = new PizzaRestaurant();
-		Restaurant.processLog("demo.txt");
-	}
-	
-	@Test (expected = LogHandlerException.class)
-	public void processLogPizzaException() throws CustomerException, PizzaException, LogHandlerException {
-		PizzaRestaurant Restaurant = new PizzaRestaurant();
-		Restaurant.processLog("demo.txt");
+		Restaurant.processLog("Test.txt");
 	}
 	
 	@Test 

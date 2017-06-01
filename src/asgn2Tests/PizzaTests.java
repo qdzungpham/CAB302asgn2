@@ -17,7 +17,7 @@ import org.junit.Test;
  * Note that an instance of asgn2Pizzas.MargheritaPizza should be used to test the functionality of the 
  * asgn2Pizzas.Pizza abstract class. 
  * 
- * @author Person B
+ * @author n9326448/Hang Su
  *
  */
 public class PizzaTests {

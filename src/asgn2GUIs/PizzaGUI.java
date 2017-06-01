@@ -34,7 +34,7 @@ import javax.swing.*;
  * You can also use this class and asgn2Wizards.PizzaWizard to test your system as a whole
  * 
  * 
- * @author Person A and Person B
+ * @author Person A and n9326448/Hang Su
  *
  */
 public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionListener {
