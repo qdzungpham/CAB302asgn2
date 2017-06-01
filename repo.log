@@ -1,0 +1,176 @@
+* aa8166b : Added comments & refactored
+*   9696bbd : Merge branch 'master' of https://github.com/rickpham/CAB302asgn2
+|\  
+| * d7f8c0f : Finish tests for pizza class
+* | b38db68 : Added tests
+|/  
+* a56ec71 : Deleted unneccesary file
+* e1b15cb : Fixed GUI
+* 0ef82b8 : add tests for pizza class
+* bf9111c : Added some tests
+* a4a5794 : Added some tests
+* 97c9003 : Added some junit tests
+* 6861125 : modify customer class
+* 1d2fa6a : Added tests for customer classes
+* 6ee3f05 : Updated log files
+* 2c5c412 : Fixed some bugs & Updated log files
+* 0979b79 : Changed the customer type
+* 8cbf54b : Implemented reset button
+* 6b451fb : Implemented all classes with customer and related gui
+* 589050f : Implemented GUI
+* e094ed3 : Made load file button's function working
+* b138c98 : Implemented browse file button
+* 3dbc09c : Implemented GUI
+* ffb2b6b : Implemented some functions in PizzaRestaurant
+* 5300ac6 : Implemented LogHandler
+* 17aa198 : Worked on Pizza's class & subclasses
+* 4ce1c31 : First commitcommit aa8166b61fc8adaef6949273545053f9e4274834
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Thu Jun 1 19:34:20 2017 +1000
+
+    Added comments & refactored
+
+commit 9696bbd292e8dbbe713aca42edc72b69fafc61d8
+Merge: b38db68 d7f8c0f
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Thu Jun 1 15:39:50 2017 +1000
+
+    Merge branch 'master' of https://github.com/rickpham/CAB302asgn2
+
+commit b38db68344bea0132df5271b3371e4641273f597
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Thu Jun 1 15:39:19 2017 +1000
+
+    Added tests
+
+commit d7f8c0fd08d9cccbbc426526bde3e0e884d83b3d
+Author: hangSu123 <h6.su@connect.qut.edu.au>
+Date:   Thu Jun 1 14:52:27 2017 +1000
+
+    Finish tests for pizza class
+
+commit a56ec71d2fe060b6635a04b6f55d9ca883929c17
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Tue May 30 18:11:26 2017 +1000
+
+    Deleted unneccesary file
+
+commit e1b15cb03eee0111438d08b8e4893235f1bffc59
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Tue May 30 18:08:54 2017 +1000
+
+    Fixed GUI
+
+commit 0ef82b825df56d1a9adf74302ae6375f9f975595
+Author: hangSu123 <h6.su@connect.qut.edu.au>
+Date:   Tue May 23 13:41:14 2017 +1000
+
+    add tests for pizza class
+
+commit bf9111c3c56a3ffa0f4248b7c7027ed124291299
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Mon May 22 20:02:42 2017 +1000
+
+    Added some tests
+
+commit a4a579438b6201d2d2261de511a292a6710e0973
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Mon May 15 17:58:43 2017 +1000
+
+    Added some tests
+
+commit 97c9003b8e85ba63997a73de0e203a7a92ed9574
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Mon May 15 12:47:47 2017 +1000
+
+    Added some junit tests
+
+commit 6861125fb7d20c2dc40efa2a781a952f4f72127c
+Author: hangSu123 <h6.su@connect.qut.edu.au>
+Date:   Fri May 12 13:41:31 2017 +1000
+
+    modify customer class
+
+commit 1d2fa6a1d844cc0726caaab6c21de4931c58b324
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Wed May 10 12:37:57 2017 +1000
+
+    Added tests for customer classes
+
+commit 6ee3f05e30edf248fe07de99a96f7e24ff3d73eb
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Mon May 8 12:50:43 2017 +1000
+
+    Updated log files
+
+commit 2c5c412fbd36046caf6e0692a72ad08660c9a499
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Mon May 8 12:48:53 2017 +1000
+
+    Fixed some bugs & Updated log files
+
+commit 0979b7972ba4cc4e98c5a6cd94f250bda8cc8db8
+Author: hangSu123 <h6.su@connect.qut.edu.au>
+Date:   Fri May 5 13:10:45 2017 +1000
+
+    Changed the customer type
+
+commit 8cbf54bf979191b60ed95c61afc09ef887053be3
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Thu May 4 16:37:58 2017 +1000
+
+    Implemented reset button
+
+commit 6b451fb1613d482243f45d593b065843f7eb2a80
+Author: hangSu123 <h6.su@connect.qut.edu.au>
+Date:   Thu May 4 13:49:01 2017 +1000
+
+    Implemented all classes with customer and related gui
+
+commit 589050f38b75340c6b8bb072dc551d4e2ab4666a
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Wed May 3 21:27:03 2017 +1000
+
+    Implemented GUI
+
+commit e094ed39931e76ae5e1770cbfd9352a1f6d377b6
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Wed May 3 12:22:42 2017 +1000
+
+    Made load file button's function working
+
+commit b138c98de2e757ec427a7ba30aa68f3faadce287
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Tue May 2 21:43:59 2017 +1000
+
+    Implemented browse file button
+
+commit 3dbc09cfef807d85b7a9cbdd449bf47f2a931750
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Tue May 2 16:57:36 2017 +1000
+
+    Implemented GUI
+
+commit ffb2b6b3a05949f9b9c231311a804be49c86f350
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Mon May 1 20:13:00 2017 +1000
+
+    Implemented some functions in PizzaRestaurant
+
+commit 5300ac6e219bcdc79d21b2daf12dd03afee843f7
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Mon May 1 19:45:27 2017 +1000
+
+    Implemented LogHandler
+
+commit 17aa198d21af35c68a5a5236b2e6818ed33413a1
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Mon May 1 12:04:30 2017 +1000
+
+    Worked on Pizza's class & subclasses
+
+commit 4ce1c31333aca30ef78e67105ea4bd00eb0c5db8
+Author: Rick Pham <q3.pham@connect.qut.edu.au>
+Date:   Thu Apr 27 15:03:48 2017 +1000
+
+    First commit
