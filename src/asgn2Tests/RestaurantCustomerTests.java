@@ -40,10 +40,24 @@ public class RestaurantCustomerTests {
 	}
 	
 	@Test 
+	public void getNumCustomerOrders2() throws CustomerException, PizzaException, LogHandlerException {
+		PizzaRestaurant test = new PizzaRestaurant();
+		test.processLog("20170102.txt");
+		assertEquals(10, test.getNumCustomerOrders());
+	}
+	
+	@Test 
 	public void getTotalDeliveryDistance() throws CustomerException, PizzaException, LogHandlerException {
 		PizzaRestaurant test = new PizzaRestaurant();
 		test.processLog("20170101.txt");
 		assertEquals(15, test.getTotalDeliveryDistance(), 0.001);
+	}
+	
+	@Test 
+	public void getTotalDeliveryDistance2() throws CustomerException, PizzaException, LogHandlerException {
+		PizzaRestaurant test = new PizzaRestaurant();
+		test.processLog("20170102.txt");
+		assertEquals(41.41, test.getTotalDeliveryDistance(), 0.001);
 	}
 	
 	@Test 

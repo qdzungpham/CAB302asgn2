@@ -108,6 +108,22 @@ public class LogHandlerCustomerTests {
 		ArrayList<Customer> test = LogHandler.populateCustomerDataset("RicktestLogSementicErrors.txt");
 	}
 	
+	@Test 
+	public void populateCustomerNormalTest() throws CustomerException, LogHandlerException {
+		ArrayList<Customer> test = LogHandler.populateCustomerDataset("20170101.txt");
+		assertEquals("Casey Jones", test.get(0).getName());
+		assertEquals("April O'Neal", test.get(1).getName());
+		assertEquals("Oroku Saki", test.get(2).getName());
+	}
+	
+	@Test 
+	public void populateCustomerNormalTest2() throws CustomerException, LogHandlerException {
+		ArrayList<Customer> test = LogHandler.populateCustomerDataset("20170102.txt");
+		assertEquals("Emma Brown", test.get(0).getName());
+		assertEquals("Lucas Anderson", test.get(1).getName());
+		assertEquals("Caden Kumar", test.get(9).getName());
+	}
+	
 	
 	
 }
