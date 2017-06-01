@@ -20,7 +20,7 @@ import asgn2Pizzas.PizzaFactory;
  * and Customer object - either as an individual Pizza/Customer object or as an
  * ArrayList of Pizza/Customer objects.
  * 
- * @author Person A and n9326448/Hang Su
+ * @author Rick Pham-n9579249 and n9326448/Hang Su
  *
  */
 public class LogHandler {
@@ -32,7 +32,7 @@ public class LogHandler {
 	 * @param filename The file name of the log file
 	 * @return an ArrayList of Customer objects from the information contained in the log file ordered as they appear in the log file. 
 	 * @throws CustomerException If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
-	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above
+	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above such as cannot find/read file
 	 * 
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
@@ -40,9 +40,11 @@ public class LogHandler {
 		String logFile = ".//logs/" + filename;
 		String line = "";
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
+		// read file
 		try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {		
             while ((line = br.readLine()) != null) {
             	try {
+            		// analyses each line and creates pizza object based on processed data
             		customerList.add(createCustomer(line));
 				} catch (CustomerException | LogHandlerException e) {
 					throw e;
@@ -69,9 +71,11 @@ public class LogHandler {
 		String logFile = ".//logs/" + filename;
 		String line = "";
 		ArrayList<Pizza> pizzasList = new ArrayList<Pizza>();
+		// reads file
 		try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {		
             while ((line = br.readLine()) != null) {
             	try {
+            		// analyses each line and creates pizza object based on processed data
 					pizzasList.add(createPizza(line));
 				} catch (PizzaException | LogHandlerException e) {
 					throw e;
@@ -102,7 +106,9 @@ public class LogHandler {
 		int LocationX;
 		int LocationY;
 		String[] currentLine = line.split(",");
+		// parses data from line and throw exception if there is an error
 		try {
+			//stores data form the line
 			customerCode = currentLine[4];
 			Name = currentLine[2];
 			MobileNumber =currentLine[3];
@@ -114,6 +120,7 @@ public class LogHandler {
 		}
 		
 		try {
+			// creates customer object
 			return CustomerFactory.getCustomer(customerCode, Name, MobileNumber, LocationX, LocationY);
 		} catch (CustomerException e) {
 			// TODO Auto-generated catch block
@@ -136,7 +143,9 @@ public class LogHandler {
 		int quantity;
 		LocalTime orderTime;
 		LocalTime deliveryTime;
+		// parses data from line and throw exception if there is an error
 		try {
+			// stores data from the line
 			String[] currentLine = line.split(",");
 			pizzaCode = currentLine[7];
 			quantity = Integer.parseInt(currentLine[8]);
@@ -148,6 +157,7 @@ public class LogHandler {
 		}
 		
 		try {
+			// creates pizza object
 			return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
 		} catch (PizzaException e) {
 			// TODO Auto-generated catch block

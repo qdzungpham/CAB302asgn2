@@ -34,7 +34,7 @@ import javax.swing.*;
  * You can also use this class and asgn2Wizards.PizzaWizard to test your system as a whole
  * 
  * 
- * @author Person A and n9326448/Hang Su
+ * @author Rick Pham-n9579249 and n9326448/Hang Su
  *
  */
 public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionListener {
@@ -69,8 +69,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		gui = this;
 		df = new DecimalFormat("0.00");
 	}
-
+ 
+	// creates GUI components
 	private void initComponents() {
+		// creates top panel containing file name text field, choose file button, reset button
 		JPanel filePanel = new JPanel();
 		JLabel selectFileLabel = new JLabel("File name: ");
 		filePath = new JTextField(35);
@@ -87,12 +89,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		fc = new JFileChooser();
 		fc.setCurrentDirectory(new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "logs"));
 		
-		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout());
-		
+		// creates customer panel
 		JPanel customersPanel = new JPanel();
 		customersPanel.setLayout(new BorderLayout());
-		customersPanel.setBorder(BorderFactory.createTitledBorder("Customers"));
+		customersPanel.setBorder(BorderFactory.createTitledBorder("Customers"));	
+		/////// inits table for customers
 		customersModel = new DefaultTableModel();
 		customersModel.addColumn("Customer Name");
 		customersModel.addColumn("Mobile Number");
@@ -100,9 +101,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		customersModel.addColumn("X and Y Location");
 		customersModel.addColumn("Distance from Restaurant");
 		JTable customersTable = new JTable(customersModel);
+		// creates scroller wrapping the table
 		JScrollPane customersScroller = new JScrollPane(customersTable);
 		customersScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		customersScroller.setPreferredSize(new Dimension(600, 200));
+		// panel to hold display button, calculate button and calculate text field
 		JPanel calTotalDistancePanel = new JPanel();
 		displayCustomersBtn = new JButton("Display customers");
 		displayCustomersBtn.setEnabled(false);
@@ -117,13 +120,15 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		calTotalDistancePanel.add(totalDistanceLabel);
 		calTotalDistancePanel.add(totalDistance);
 		calTotalDistancePanel.add(calTotalDistanceBtn);
+		// adds scroller and buttons panel to main customer panel
 		customersPanel.add(customersScroller, BorderLayout.PAGE_START);
 		customersPanel.add(calTotalDistancePanel, BorderLayout.PAGE_END);
 		
-		
+		// creates pizza panel
 		JPanel pizzasPanel = new JPanel();
 		pizzasPanel.setLayout(new BorderLayout());
 		pizzasPanel.setBorder(BorderFactory.createTitledBorder("Orders"));
+		////////// inits pizzas table
 		pizzasModel = new DefaultTableModel();
 		pizzasModel.addColumn("Pizza Type");
 		pizzasModel.addColumn("Quantity");
@@ -131,9 +136,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		pizzasModel.addColumn("Order Cost");
 		pizzasModel.addColumn("Order Profit");
 		JTable pizzasTable = new JTable(pizzasModel);
+		// creates scroller wrapping the table
 		JScrollPane pizzasScroller = new JScrollPane(pizzasTable);
 		pizzasScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		pizzasScroller.setPreferredSize(new Dimension(600, 200));
+		// panel to hold display button, calculate button and calculate text field
 		JPanel calTotalProfitPanel = new JPanel();
 		displayOrdersBtn = new JButton("Display orders");
 		displayOrdersBtn.setEnabled(false);
@@ -148,13 +155,18 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		calTotalProfitPanel.add(totalProfitLabel);
 		calTotalProfitPanel.add(totalProfit);
 		calTotalProfitPanel.add(calTotalProfitBtn);
+		// adds scroller and buttons panel to main pizza panel
 		pizzasPanel.add(pizzasScroller, BorderLayout.PAGE_START);
 		pizzasPanel.add(calTotalProfitPanel, BorderLayout.PAGE_END);
 		
+		// creates main panel that wraps all panels above
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(filePanel, BorderLayout.NORTH);
 		mainPanel.add(customersPanel, BorderLayout.CENTER);
 		mainPanel.add(pizzasPanel, BorderLayout.SOUTH);
 		
+		// adds main panel to the frame
 		getContentPane().add(mainPanel);
 	}
 	
@@ -164,12 +176,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		createAndShowGUI();
 	}
 	
+	// creates the GUI and shows it
 	private static void createAndShowGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		gui.setResizable(false);
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//gui.setPreferredSize(new Dimension(500, 700));
 		gui.setLocation(new Point(700, 200));
+		// displays the window
 		gui.pack();
 		gui.setVisible(true);
 	}
@@ -182,57 +195,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		if (source == browseFileBtn) {
 			int returnVal = fc.showOpenDialog(gui);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File file = fc.getSelectedFile();
-				fileName = file.getName();
-				filePath.setText(fileName);
-				restaurant = new PizzaRestaurant();
-				boolean logProcessStatus = false;
-				try {
-					logProcessStatus = restaurant.processLog(fileName);
-				} catch (CustomerException | PizzaException | LogHandlerException e1) {
-					// TODO Auto-generated catch block
-					System.out.println(e1.getMessage());
-					e1.printStackTrace();
-					JOptionPane.showMessageDialog(gui, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				if (logProcessStatus) {
-					displayCustomersBtn.setEnabled(true);
-					displayOrdersBtn.setEnabled(true);
-					resetBtn.setEnabled(true);
-					browseFileBtn.setEnabled(false);
-					JOptionPane.showMessageDialog(gui, "File loaded.", "Information", JOptionPane.INFORMATION_MESSAGE);
-				}
+				processLogFile();
 			} 
 		} else if (source == displayCustomersBtn) {
-			for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
-				Customer currentCustomer = null;
-				try {
-					currentCustomer = restaurant.getCustomerByIndex(i);	
-					customersModel.addRow(new Object[]{currentCustomer.getName(), currentCustomer.getMobileNumber(), currentCustomer.getCustomerType(),
-							currentCustomer.getLocationX()+", "+currentCustomer.getLocationY(),String.valueOf(df.format(currentCustomer.getDeliveryDistance()))});
-					displayCustomersBtn.setEnabled(false);
-					calTotalDistanceBtn.setEnabled(true);
-				} catch (CustomerException e1) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(gui, e1.getMessage() + " (index " + i +").", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-			}
-			JOptionPane.showMessageDialog(gui, "Customers displayed.", "Information", JOptionPane.INFORMATION_MESSAGE);
+			displayCustomersTable();
 		} else if (source == displayOrdersBtn) {
-			for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
-				Pizza currentPizza = null;
-				try {
-					currentPizza = restaurant.getPizzaByIndex(i);
-					pizzasModel.addRow(new Object[]{currentPizza.getPizzaType(), currentPizza.getQuantity(), String.valueOf(df.format(currentPizza.getOrderPrice())), 
-							String.valueOf(df.format(currentPizza.getOrderCost())), String.valueOf(df.format(currentPizza.getOrderProfit()))});
-					displayOrdersBtn.setEnabled(false);
-					calTotalProfitBtn.setEnabled(true);
-				} catch (PizzaException e1) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(gui, e1.getMessage() + " (index " + i +").", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-			}
-			JOptionPane.showMessageDialog(gui, "Orders displayed.", "Information", JOptionPane.INFORMATION_MESSAGE);
+			displayPizzasTable();
 		} else if (source == calTotalDistanceBtn) {
 			totalDistance.setText(String.valueOf(df.format(restaurant.getTotalDeliveryDistance())));
 			JOptionPane.showMessageDialog(gui, "Total distance calculated.", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -240,21 +208,86 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			totalProfit.setText(String.valueOf(df.format(restaurant.getTotalProfit())));
 			JOptionPane.showMessageDialog(gui, "Total profit calculated.", "Information", JOptionPane.INFORMATION_MESSAGE);
 		} else if (source == resetBtn) {
-			restaurant.resetDetails();
-			customersModel.setRowCount(0);
-			pizzasModel.setRowCount(0);
-			displayCustomersBtn.setEnabled(false);
-			displayOrdersBtn.setEnabled(false);
-			resetBtn.setEnabled(false);
-			calTotalDistanceBtn.setEnabled(false);
-			calTotalProfitBtn.setEnabled(false);
-			browseFileBtn.setEnabled(true);
-			filePath.setText("");
-			totalDistance.setText("");
-			totalProfit.setText("");
-			JOptionPane.showMessageDialog(gui, "All data reset.", "Information", JOptionPane.INFORMATION_MESSAGE);
+			resetAllData();
 		}
 		
+	}
+
+	// reset all fields, tables and buttons to its initially state
+	private void resetAllData() {
+		restaurant.resetDetails();
+		customersModel.setRowCount(0);
+		pizzasModel.setRowCount(0);
+		displayCustomersBtn.setEnabled(false);
+		displayOrdersBtn.setEnabled(false);
+		resetBtn.setEnabled(false);
+		calTotalDistanceBtn.setEnabled(false);
+		calTotalProfitBtn.setEnabled(false);
+		browseFileBtn.setEnabled(true);
+		filePath.setText("");
+		totalDistance.setText("");
+		totalProfit.setText("");
+		JOptionPane.showMessageDialog(gui, "All data reset.", "Information", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	// add data to the table
+	private void displayPizzasTable() {
+		for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
+			Pizza currentPizza = null;
+			try {
+				currentPizza = restaurant.getPizzaByIndex(i);
+				pizzasModel.addRow(new Object[]{currentPizza.getPizzaType(), currentPizza.getQuantity(), String.valueOf(df.format(currentPizza.getOrderPrice())), 
+						String.valueOf(df.format(currentPizza.getOrderCost())), String.valueOf(df.format(currentPizza.getOrderProfit()))});
+				displayOrdersBtn.setEnabled(false);
+			} catch (PizzaException e1) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(gui, e1.getMessage() + " (index " + i +").", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		JOptionPane.showMessageDialog(gui, "Orders displayed.", "Information", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	// adds data to the table
+	private void displayCustomersTable() {
+		for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
+			Customer currentCustomer = null;
+			try {
+				currentCustomer = restaurant.getCustomerByIndex(i);	
+				customersModel.addRow(new Object[]{currentCustomer.getName(), currentCustomer.getMobileNumber(), currentCustomer.getCustomerType(),
+						currentCustomer.getLocationX()+", "+currentCustomer.getLocationY(),String.valueOf(df.format(currentCustomer.getDeliveryDistance()))});
+				displayCustomersBtn.setEnabled(false);
+			} catch (CustomerException e1) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(gui, e1.getMessage() + " (index " + i +").", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		JOptionPane.showMessageDialog(gui, "Customers displayed.", "Information", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	// processes log file when user selected a file
+	private void processLogFile() {
+		File file = fc.getSelectedFile();
+		fileName = file.getName();
+		filePath.setText(fileName);
+		restaurant = new PizzaRestaurant();
+		boolean logProcessStatus = false;
+		try {
+			logProcessStatus = restaurant.processLog(fileName);
+		} catch (CustomerException | PizzaException | LogHandlerException e1) {
+			// TODO Auto-generated catch block
+			System.out.println(e1.getMessage());
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(gui, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		if (logProcessStatus) {
+			displayCustomersBtn.setEnabled(true);
+			displayOrdersBtn.setEnabled(true);
+			calTotalDistanceBtn.setEnabled(true);
+			calTotalProfitBtn.setEnabled(true);
+			resetBtn.setEnabled(true);
+			browseFileBtn.setEnabled(false);
+			JOptionPane.showMessageDialog(gui, "File loaded.", "Information", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	

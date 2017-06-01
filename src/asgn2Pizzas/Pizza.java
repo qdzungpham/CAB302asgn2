@@ -12,7 +12,7 @@ import asgn2Exceptions.PizzaException;
  * Each of these subclasses have a different set of toppings. A description of the class's fields
  * and their constraints is provided in Section 5.1 of the Assignment Specification. 
  * 
- * @author Person A
+ * @author Rick Pham - n9579249
  *
  */
 public abstract class Pizza  {
@@ -39,7 +39,9 @@ public abstract class Pizza  {
 	 * @param deliveryTime - The time that the pizza was delivered to the customer
 	 * @param type -  A human understandable description of this Pizza type
 	 * @param price - The price that the pizza is sold to the customer
-	 * @throws PizzaException if supplied parameters are invalid 
+	 * @throws PizzaException if supplied parameters are invalid. That are quantity less than 1 or greater than 10,
+	 * order time before 7pm or after 11pm, delivery time before order time + 10min order time 
+	 * or delivery time after order time + 1 hour
 	 * 
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
