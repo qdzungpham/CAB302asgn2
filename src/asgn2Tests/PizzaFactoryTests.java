@@ -13,7 +13,7 @@ import asgn2Pizzas.PizzaFactory;
 /** 
  * A class that tests the asgn2Pizzas.PizzaFactory class.
  * 
- * @author Person B 
+ * @author n9326448/Hang Su 
  * 
  */
 public class PizzaFactoryTests {
@@ -37,43 +37,42 @@ public class PizzaFactoryTests {
 		LocalTime order_time = order_open;
 		LocalTime delivery_time = order_time.plusMinutes(30);
 		PizzaFactory.getPizza("HVD", 3, order_time, delivery_time);
-		Pizza  MakePizza = PizzaFactory.getPizza("12", 3, order_time, delivery_time);
 	}
 	@Test(expected = PizzaException.class)
 	public void InvalidPizzaCodeException1() throws PizzaException{
 		LocalTime order_time = order_open;
 		LocalTime delivery_time = order_time.plusMinutes(30);
-		Pizza  MakePizza = PizzaFactory.getPizza("12", 3, order_time, delivery_time);
+	    PizzaFactory.getPizza("12", 3, order_time, delivery_time);
 	}
 	@Test(expected = PizzaException.class)
 	public void InvalidPizzaCodeException2() throws PizzaException{
 		LocalTime order_time = order_open;
 		LocalTime delivery_time = order_time.plusMinutes(30);
-		Pizza  MakePizza = PizzaFactory.getPizza(" ", 3, order_time, delivery_time);
+		PizzaFactory.getPizza(" ", 3, order_time, delivery_time);
 	}
 	@Test(expected = PizzaException.class)
 	public void OrderedMoreThan10Pizza() throws PizzaException{
 		LocalTime order_time = order_open;
 		LocalTime delivery_time = order_time.plusMinutes(30);
-		Pizza  MakePizza = PizzaFactory.getPizza("PZV", 11, order_time, delivery_time);
+		PizzaFactory.getPizza("PZV", 11, order_time, delivery_time);
 	}
 	@Test(expected = PizzaException.class)
 	public void OrderedLessThanOnePizza() throws PizzaException{
 		LocalTime order_time = order_open;
 		LocalTime delivery_time = order_time.plusMinutes(30);
-		Pizza  MakePizza = PizzaFactory.getPizza("PZV", 0, order_time, delivery_time);
+		PizzaFactory.getPizza("PZV", 0, order_time, delivery_time);
 	}
 	@Test(expected = PizzaException.class)
 	public void OrdereTimeBeforeOrder_open() throws PizzaException{
 		LocalTime order_time = order_open.minusHours(1);
 		LocalTime delivery_time = order_time.plusMinutes(30);
-		Pizza  MakePizza = PizzaFactory.getPizza("PZV", 0, order_time, delivery_time);
+		PizzaFactory.getPizza("PZV", 2, order_time, delivery_time);
 	}
 	@Test(expected = PizzaException.class)
 	public void OrdereTimeAfterOrder_close() throws PizzaException{
-		LocalTime order_time = order_close.minusHours(1);
+		LocalTime order_time = order_close.plusHours(1);
 		LocalTime delivery_time = order_time.plusMinutes(30);
-		Pizza  MakePizza = PizzaFactory.getPizza("PZV", 0, order_time, delivery_time);
+		PizzaFactory.getPizza("PZV", 1, order_time, delivery_time);
 	}
 	
 }

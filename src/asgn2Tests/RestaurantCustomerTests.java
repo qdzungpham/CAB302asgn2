@@ -66,7 +66,7 @@ public class RestaurantCustomerTests {
 		test.processLog("RicktestLogLineParsingErrors.txt");
 	}
 	
-	@Test (expected = CustomerException.class)
+	@Test (expected = LogHandlerException.class)
 	public void processLogCustomerException() throws CustomerException, PizzaException, LogHandlerException {
 		PizzaRestaurant test = new PizzaRestaurant();
 		test.processLog("RicktestLogCustomerException.txt");
